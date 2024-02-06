@@ -6,20 +6,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install system dependencies
 RUN apt-get update && \
     apt-get install -y \
-        git \
         python3.12 \
         python3-pip
 
-# Set the working directory
-WORKDIR /app
-
-COPY . /app
-
 # Install required python packages
-
-RUN python3 -m pip install --upgrade pip
+COPY requirements.txt /app
 
 RUN python3 -m pip install -r requirements.txt
+
+# Copy project into container
+COPY . /app
 
 # Set the entrypoint
 ENTRYPOINT [ "python3", "app.py" ]
