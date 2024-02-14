@@ -9,6 +9,9 @@ RUN apt-get update && \
         python3.12 \
         python3-pip
 
+# Set the working directory
+WORKDIR /app
+
 # Install required python packages
 COPY requirements.txt /app
 
