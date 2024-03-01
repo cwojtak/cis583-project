@@ -1,6 +1,6 @@
 import os
 
-import dataset
+import math
 import pandas as pd
 import numpy as np
 
@@ -52,9 +52,26 @@ def main():
 
         # TODO: Look at standardize using z-score method? Returns values with mean=0 and std=1
 
+        # Translate string labels to numbers. 0 = benign, 1 = FTP, 2 = SSH
+        df_to_normalize["Label"] = df_to_normalize["Label"].map({"Benign": 0, "FTP-BruteForce": 1, "SSH-Bruteforce": 2})
+
+        # drop rows with empty values
+        labels = df_to_normalize["Label"]
+        df_to_normalize = df_to_normalize.drop(["Label"], axis=1)
+        df_to_normalize = df_to_normalize.astype(np.float32)
+        df_to_normalize = df_to_normalize.join(labels)
+        df_to_normalize = df_to_normalize.dropna()
+
+        # Shuffle data and split into training and evaluation data
+        df_to_normalize = df_to_normalize.sample(frac=1)
+        training_df = df_to_normalize.head(math.floor(len(df_to_normalize.index) / 2))
+        evaluation_df = df_to_normalize.head(math.floor(-(len(df_to_normalize.index) / 2)))
+
         # rename file to ***cleaned.csv
-        file_name_cleaned_csv = file_name.replace(".csv", "_cleaned.csv")
-        df_to_normalize.to_csv(os.path.join(path, file_name_cleaned_csv))
+        training_file_name_cleaned_csv = file_name.replace(".csv", "_cleaned_training.csv")
+        evaluation_file_name_cleaned_csv = file_name.replace(".csv", "_cleaned_evaluation.csv")
+        training_df.to_csv(os.path.join(path, training_file_name_cleaned_csv), index=False)
+        evaluation_df.to_csv(os.path.join(path, evaluation_file_name_cleaned_csv), index=False)
         print(file_name + " has been cleaned")
 
 
