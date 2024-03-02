@@ -2,8 +2,6 @@ import torch
 import torch.nn as nn
 import torch.utils.data
 
-import numpy as np
-
 from dataset import load_data
 
 
@@ -18,7 +16,8 @@ class BasicDDoSModel(nn.Module):
             nn.ReLU(),
             nn.Linear(38, 15),
             nn.ReLU(),
-            nn.Linear(15, 3)
+            nn.Linear(15, 3),
+            nn.Sigmoid()
         )
 
     # Function to compute the forward pass
@@ -30,9 +29,9 @@ class BasicDDoSModel(nn.Module):
 # Training function for the basic model
 def train_basic_model(device):
     # Define hyperparameters
-    epochs = 250
+    epochs = 100
     batch_size = 256
-    learning_rate = 0.5
+    learning_rate = 1
 
     # Create model and define loss function and optimizer
     model = BasicDDoSModel().to(device)
@@ -86,7 +85,7 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
             # Run data through the model and calculate loss
             model_result = model(inputs)
 
-            avg_loss += loss_func(model_result, true_class)
+            avg_loss += loss_func(model_result, true_class).item()
 
             model_result = model_result.argmax(dim=1)
             true_class = true_class.argmax(dim=1)

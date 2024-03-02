@@ -36,8 +36,8 @@ def load_data(path, device):
     for i in range(len(eval_classes)):
         tensor_eval_classes[i, eval_classes[i]] = 1
     tensor_train_classes = torch.tensor((), dtype=torch.float32).new_zeros((len(train_classes), 3)).to(device)
-    for i in range(len(eval_classes)):
-        tensor_eval_classes[i, eval_classes[i]] = 1
+    for i in range(len(train_classes)):
+        tensor_train_classes[i, train_classes[i]] = 1
     tensor_eval_inputs = torch.from_numpy(eval_inputs.to_numpy()).float().to(device)
     tensor_train_inputs = torch.from_numpy(train_inputs.to_numpy()).float().to(device)
 
