@@ -29,9 +29,9 @@ class BasicDDoSModel(nn.Module):
 # Training function for the basic model
 def train_basic_model(device):
     # Define hyperparameters
-    epochs = 100
+    epochs = 50
     batch_size = 256
-    learning_rate = 1
+    learning_rate = 0.5
 
     # Create model and define loss function and optimizer
     model = BasicDDoSModel().to(device)

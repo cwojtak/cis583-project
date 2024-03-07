@@ -65,7 +65,7 @@ def main():
         # Shuffle data and split into training and evaluation data
         df_to_normalize = df_to_normalize.sample(frac=1)
         training_df = df_to_normalize.head(math.floor(len(df_to_normalize.index) / 2))
-        evaluation_df = df_to_normalize.head(math.floor(-(len(df_to_normalize.index) / 2)))
+        evaluation_df = df_to_normalize.tail(math.floor(len(df_to_normalize.index) / 2))
 
         # rename file to ***cleaned.csv
         training_file_name_cleaned_csv = file_name.replace(".csv", "_cleaned_training.csv")

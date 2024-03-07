@@ -41,4 +41,12 @@ def load_data(path, device):
     tensor_eval_inputs = torch.from_numpy(eval_inputs.to_numpy()).float().to(device)
     tensor_train_inputs = torch.from_numpy(train_inputs.to_numpy()).float().to(device)
 
+    print("Training dataset composition: %i benign, %i SSH DDoS, and %i FTP DDoS" % (
+        (train_classes == 0).sum(), (train_classes == 1).sum(), (train_classes == 2).sum()
+    ))
+
+    print("Evaluation dataset composition: %i benign, %i SSH DDoS, and %i FTP DDoS" % (
+        (eval_classes == 0).sum(), (eval_classes == 1).sum(), (eval_classes == 2).sum()
+    ))
+
     return DDoSDataset(tensor_train_inputs, tensor_train_classes), DDoSDataset(tensor_eval_inputs, tensor_eval_classes)
