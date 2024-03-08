@@ -1,12 +1,13 @@
 import torch
 import torch.nn as nn
 import torch.utils.data
+import time
 
 from dataset import load_data
 
 
 # Basic model for classifying packets as part of various types of DDoS attacks
-class BasicDDoSModel(nn.Module):
+class BasicDoSModel(nn.Module):
     # Construct the model with a three layer stack
     def __init__(self):
         super().__init__()
@@ -34,7 +35,7 @@ def train_basic_model(device):
     learning_rate = 0.5
 
     # Create model and define loss function and optimizer
-    model = BasicDDoSModel().to(device)
+    model = BasicDoSModel().to(device)
     loss_func = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
@@ -42,6 +43,8 @@ def train_basic_model(device):
 
     train_dataset_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size)
     eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=batch_size)
+
+    start_time = time.time()
 
     print("Initial state of the model\n====================================")
     evaluate_basic_model(model, eval_dataset_loader, loss_func)
@@ -64,6 +67,8 @@ def train_basic_model(device):
         evaluate_basic_model(model, eval_dataset_loader, loss_func)
 
     # Save model
+    end_time = time.time()
+    print("Total time elapsed: %.2f" % (end_time - start_time))
     print("Training complete! Saving model...")
 
     torch.save(model, "models/basic_model.pth")
@@ -94,4 +99,3 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
             num_correct += (model_result == true_class).sum().item()
 
     print("Evaluation complete: \n Number Correct: (%6d/%6d) \n Total Loss: %2.8f" % (num_correct, total, avg_loss))
-
