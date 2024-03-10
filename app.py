@@ -21,7 +21,7 @@ if __name__ == '__main__':
     train_basic_model(device)
 
     # Evaluate model
-    train_dataset, eval_dataset = load_data("02-14-2018", device)
+    train_dataset, eval_dataset = load_data(device)
     eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=256)
     loss_func = nn.MSELoss()
     evaluate_basic_model(torch.load("models/basic_model.pth"), eval_dataset_loader, loss_func)

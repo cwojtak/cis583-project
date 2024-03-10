@@ -8,11 +8,16 @@ import numpy as np
 def main():
     # for files in data folder go through all the csvs and store the names in a list
     # files = os.listdir('data')
-    #only cleaning one file for midterm
-    files = ["02-14-2018.csv"]
+    # only cleaning one file for midterm
+    files = ["02-14-2018.csv", "02-15-2018.csv", "02-16-2018.csv"]
     path = "data/"
 
+    big_training_df = pd.DataFrame()
+    big_evaluation_df = pd.DataFrame()
+
     for file_name in files:
+        print("Cleaning " + file_name)
+
         data = pd.read_csv(os.path.join(path, file_name))
 
         # top = files.head()
@@ -53,7 +58,11 @@ def main():
         # TODO: Look at standardize using z-score method? Returns values with mean=0 and std=1
 
         # Translate string labels to numbers. 0 = benign, 1 = FTP, 2 = SSH
-        df_to_normalize["Label"] = df_to_normalize["Label"].map({"Benign": 0, "FTP-BruteForce": 1, "SSH-Bruteforce": 2})
+        df_to_normalize["Label"] = df_to_normalize["Label"].map({"Benign": 0, "FTP-BruteForce": 1, "SSH-Bruteforce": 2,
+                                                                 "DoS attacks-GoldenEye": 3,
+                                                                 "DoS attacks-Slowloris": 4,
+                                                                 "DoS attacks-SlowHTTPTest": 5,
+                                                                 "DoS attacks-Hulk": 6})
 
         # drop rows with empty values
         labels = df_to_normalize["Label"]
@@ -73,6 +82,19 @@ def main():
         training_df.to_csv(os.path.join(path, training_file_name_cleaned_csv), index=False)
         evaluation_df.to_csv(os.path.join(path, evaluation_file_name_cleaned_csv), index=False)
         print(file_name + " has been cleaned")
+
+        big_training_df = pd.concat([big_training_df, training_df], ignore_index=True)
+        big_evaluation_df = pd.concat([big_evaluation_df, evaluation_df], ignore_index=True)
+
+    # Stratified sampling of all the data
+    print("Performing stratified sampling of the data")
+
+    big_training_df = big_training_df.groupby("Label", group_keys=False).apply(lambda group: group.sample(frac=0.2))
+    big_evaluation_df = big_evaluation_df.groupby("Label", group_keys=False).apply(lambda group: group.sample(frac=0.2))
+
+    # Save sampled data
+    big_training_df.to_csv("data/master_data_cleaned_training.csv", index=False)
+    big_evaluation_df.to_csv("data/master_data_cleaned_evaluation.csv", index=False)
 
 
 if __name__ == '__main__':

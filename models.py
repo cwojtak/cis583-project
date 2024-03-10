@@ -17,7 +17,7 @@ class BasicDoSModel(nn.Module):
             nn.ReLU(),
             nn.Linear(38, 15),
             nn.ReLU(),
-            nn.Linear(15, 3),
+            nn.Linear(15, 7),
             nn.Sigmoid()
         )
 
@@ -32,14 +32,14 @@ def train_basic_model(device):
     # Define hyperparameters
     epochs = 50
     batch_size = 256
-    learning_rate = 0.5
+    learning_rate = 0.75
 
     # Create model and define loss function and optimizer
     model = BasicDoSModel().to(device)
     loss_func = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
-    train_dataset, eval_dataset = load_data("02-14-2018", device)
+    train_dataset, eval_dataset = load_data(device)
 
     train_dataset_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size)
     eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=batch_size)
