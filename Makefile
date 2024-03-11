@@ -3,4 +3,5 @@ all:
 	docker run --name cis583-container --gpus all -it --rm -v -d \
 		-v './models:/app/models' \
 		-v './data:/app/data'  \
+		-v './raw_results:/app/raw_results' \
 		cis583-project

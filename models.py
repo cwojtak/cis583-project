@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.utils.data
 import time
+from datetime import datetime
+import pandas as pd
 
 from dataset import load_data
 
@@ -17,7 +19,7 @@ class BasicDoSModel(nn.Module):
             nn.ReLU(),
             nn.Linear(38, 15),
             nn.ReLU(),
-            nn.Linear(15, 7),
+            nn.Linear(15, 12),
             nn.Sigmoid()
         )
 
@@ -44,6 +46,9 @@ def train_basic_model(device):
     train_dataset_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size)
     eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=batch_size)
 
+    # Prepare method to store graph data
+    graph_data = pd.DataFrame(columns=["Accuracy", "Precision", "Recall", "F1 Score", "Average Loss"])
+
     start_time = time.time()
 
     print("Initial state of the model\n====================================")
@@ -64,7 +69,9 @@ def train_basic_model(device):
             optimizer.zero_grad()
 
         # Evaluate model with evaluation data
-        evaluate_basic_model(model, eval_dataset_loader, loss_func)
+        data_row = evaluate_basic_model(model, eval_dataset_loader, loss_func)
+        print(data_row)
+        graph_data = pd.concat([graph_data, data_row])
 
     # Save model
     end_time = time.time()
@@ -72,6 +79,7 @@ def train_basic_model(device):
     print("Training complete! Saving model...")
 
     torch.save(model, "models/basic_model.pth")
+    graph_data.to_csv("raw_results/data_%s.csv" % datetime.now().strftime("%m-%d-%Y_%H-%M-%S"))
 
     print("Save complete!")
 
@@ -124,3 +132,5 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
     print("Evaluation complete:\n Number Correct: (%6d/%6d)\n Accuracy: %2.8f\n Precision: %2.8f\n Recall: %2.8f\n "
           "F1 Score: %2.8f\n Average Loss: %2.8f\n" % (num_correct, total, accuracy, precision, recall, f1_score,
                                                        avg_loss))
+    return pd.DataFrame({"Accuracy": [accuracy], "Precision": [precision], "Recall": [recall],
+                         "F1 Score": [f1_score], "Average Loss": [avg_loss]})

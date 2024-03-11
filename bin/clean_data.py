@@ -9,7 +9,7 @@ def main():
     # for files in data folder go through all the csvs and store the names in a list
     # files = os.listdir('data')
     # only cleaning one file for midterm
-    files = ["02-14-2018.csv", "02-15-2018.csv", "02-16-2018.csv"]
+    files = ["02-14-2018.csv", "02-15-2018.csv", "02-16-2018.csv", "02-21-2018.csv", "02-22-2018.csv", "02-23-2018.csv"]
     path = "data/"
 
     big_training_df = pd.DataFrame()
@@ -62,7 +62,12 @@ def main():
                                                                  "DoS attacks-GoldenEye": 3,
                                                                  "DoS attacks-Slowloris": 4,
                                                                  "DoS attacks-SlowHTTPTest": 5,
-                                                                 "DoS attacks-Hulk": 6})
+                                                                 "DoS attacks-Hulk": 6,
+                                                                 "DDOS attack-LOIC-UDP": 7,
+                                                                 "DDOS attack-HOIC": 8,
+                                                                 "Brute Force -Web": 9,
+                                                                 "Brute Force -XSS": 10,
+                                                                 "SQL Injection": 11})
 
         # drop rows with empty values
         labels = df_to_normalize["Label"]
