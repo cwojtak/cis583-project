@@ -41,13 +41,19 @@ def load_data(device):
     tensor_eval_inputs = torch.from_numpy(eval_inputs.to_numpy()).float().to(device)
     tensor_train_inputs = torch.from_numpy(train_inputs.to_numpy()).float().to(device)
 
-    print("Training dataset composition: %i benign, %i SSH DoS, and %i FTP DoS" % (
-        (train_classes == 0).sum(), (train_classes == 1).sum(), (train_classes == 2).sum()
-    ))
+    print("Training dataset composition: %i benign, %i SSH DoS, %i FTP DoS, %i GoldenEye DoS, %i Slowloris DoS, "
+          "%i SlowHTTPTest DoS, and %i Hulk DoS" % (
+              (train_classes == 0).sum(), (train_classes == 1).sum(), (train_classes == 2).sum(),
+              (train_classes == 3).sum(), (train_classes == 4).sum(), (train_classes == 5).sum(),
+              (train_classes == 6).sum()
+          ))
 
-    print("Evaluation dataset composition: %i benign, %i SSH DoS, and %i FTP DoS" % (
-        (eval_classes == 0).sum(), (eval_classes == 1).sum(), (eval_classes == 2).sum()
-    ))
+    print("Evaluation dataset composition: %i benign, %i SSH DoS, %i FTP DoS, %i GoldenEye DoS, %i Slowloris DoS, "
+          "%i SlowHTTPTest DoS, and %i Hulk DoS" % (
+              (eval_classes == 0).sum(), (eval_classes == 1).sum(), (eval_classes == 2).sum(),
+              (eval_classes == 3).sum(), (eval_classes == 4).sum(), (eval_classes == 5).sum(),
+              (eval_classes == 6).sum()
+          ))
 
     return (DoSDataset(tensor_train_inputs, tensor_train_classes),
             DoSDataset(tensor_eval_inputs, tensor_eval_classes))

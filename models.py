@@ -78,10 +78,16 @@ def train_basic_model(device):
 
 # Evaluation function for the basic model
 def evaluate_basic_model(model, eval_dataset_loader, loss_func):
+    print("Evaluating the model...")
+
     # Prepare statistics
     num_correct = 0
     total = len(eval_dataset_loader.dataset)
     avg_loss = 0
+    tp = 0
+    tn = 0
+    fp = 0
+    fn = 0
 
     # Evaluate without calculating gradients
     model.eval()
@@ -98,4 +104,23 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
             # Determine the raw number of correct guesses
             num_correct += (model_result == true_class).sum().item()
 
-    print("Evaluation complete: \n Number Correct: (%6d/%6d) \n Total Loss: %2.8f" % (num_correct, total, avg_loss))
+            # Update tp, tn, fp, fn
+            model_results_dos = model_result != 0
+            true_class_dos = true_class != 0
+            current_tp = torch.logical_and(model_results_dos, true_class_dos).sum().item()
+            current_tn = torch.logical_and(torch.logical_not(model_results_dos),
+                                           torch.logical_not(true_class_dos)).sum().item()
+            tp += current_tp
+            tn += current_tn
+            fp += model_results_dos.sum().item() - current_tp
+            fn += torch.logical_not(model_results_dos).sum().item() - current_tn
+
+    avg_loss /= total
+    precision = tp / (tp + fp) if tp + fp != 0 else 0
+    recall = tp / (tp + fn) if tp + fp != 0 else 0
+    f1_score = 2 * precision * recall / (precision + recall) if precision + recall != 0 else 0
+    accuracy = num_correct / total
+
+    print("Evaluation complete:\n Number Correct: (%6d/%6d)\n Accuracy: %2.8f\n Precision: %2.8f\n Recall: %2.8f\n "
+          "F1 Score: %2.8f\n Average Loss: %2.8f\n" % (num_correct, total, accuracy, precision, recall, f1_score,
+                                                       avg_loss))
