@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.utils.data
 import time
+from datetime import datetime
+import pandas as pd
 
 from dataset import load_data
 
@@ -17,7 +19,7 @@ class BasicDoSModel(nn.Module):
             nn.ReLU(),
             nn.Linear(38, 15),
             nn.ReLU(),
-            nn.Linear(15, 3),
+            nn.Linear(15, 12),
             nn.Sigmoid()
         )
 
@@ -32,17 +34,20 @@ def train_basic_model(device):
     # Define hyperparameters
     epochs = 50
     batch_size = 256
-    learning_rate = 0.5
+    learning_rate = 0.75
 
     # Create model and define loss function and optimizer
     model = BasicDoSModel().to(device)
     loss_func = nn.MSELoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
-    train_dataset, eval_dataset = load_data("02-14-2018", device)
+    train_dataset, eval_dataset = load_data(device)
 
     train_dataset_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size)
     eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=batch_size)
+
+    # Prepare method to store graph data
+    graph_data = pd.DataFrame(columns=["Accuracy", "Precision", "Recall", "F1 Score", "Average Loss"])
 
     start_time = time.time()
 
@@ -64,7 +69,9 @@ def train_basic_model(device):
             optimizer.zero_grad()
 
         # Evaluate model with evaluation data
-        evaluate_basic_model(model, eval_dataset_loader, loss_func)
+        data_row = evaluate_basic_model(model, eval_dataset_loader, loss_func)
+        print(data_row)
+        graph_data = pd.concat([graph_data, data_row])
 
     # Save model
     end_time = time.time()
@@ -72,16 +79,23 @@ def train_basic_model(device):
     print("Training complete! Saving model...")
 
     torch.save(model, "models/basic_model.pth")
+    graph_data.to_csv("raw_results/data_%s.csv" % datetime.now().strftime("%m-%d-%Y_%H-%M-%S"))
 
     print("Save complete!")
 
 
 # Evaluation function for the basic model
 def evaluate_basic_model(model, eval_dataset_loader, loss_func):
+    print("Evaluating the model...")
+
     # Prepare statistics
     num_correct = 0
     total = len(eval_dataset_loader.dataset)
     avg_loss = 0
+    tp = 0
+    tn = 0
+    fp = 0
+    fn = 0
 
     # Evaluate without calculating gradients
     model.eval()
@@ -98,4 +112,25 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
             # Determine the raw number of correct guesses
             num_correct += (model_result == true_class).sum().item()
 
-    print("Evaluation complete: \n Number Correct: (%6d/%6d) \n Total Loss: %2.8f" % (num_correct, total, avg_loss))
+            # Update tp, tn, fp, fn
+            model_results_dos = model_result != 0
+            true_class_dos = true_class != 0
+            current_tp = torch.logical_and(model_results_dos, true_class_dos).sum().item()
+            current_tn = torch.logical_and(torch.logical_not(model_results_dos),
+                                           torch.logical_not(true_class_dos)).sum().item()
+            tp += current_tp
+            tn += current_tn
+            fp += model_results_dos.sum().item() - current_tp
+            fn += torch.logical_not(model_results_dos).sum().item() - current_tn
+
+    avg_loss /= total
+    precision = tp / (tp + fp) if tp + fp != 0 else 0
+    recall = tp / (tp + fn) if tp + fp != 0 else 0
+    f1_score = 2 * precision * recall / (precision + recall) if precision + recall != 0 else 0
+    accuracy = num_correct / total
+
+    print("Evaluation complete:\n Number Correct: (%6d/%6d)\n Accuracy: %2.8f\n Precision: %2.8f\n Recall: %2.8f\n "
+          "F1 Score: %2.8f\n Average Loss: %2.8f\n" % (num_correct, total, accuracy, precision, recall, f1_score,
+                                                       avg_loss))
+    return pd.DataFrame({"Accuracy": [accuracy], "Precision": [precision], "Recall": [recall],
+                         "F1 Score": [f1_score], "Average Loss": [avg_loss]})
