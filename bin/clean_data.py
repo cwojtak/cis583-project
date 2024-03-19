@@ -6,17 +6,15 @@ import numpy as np
 
 
 def main():
-    # for files in data folder go through all the csvs and store the names in a list
-    # files = os.listdir('data')
-    # only cleaning one file for midterm
-    files = ["02-14-2018.csv", "02-15-2018.csv", "02-16-2018.csv", "02-21-2018.csv", "02-22-2018.csv", "02-23-2018.csv"]
+    # Prepare each data file we are going to use
+    files = ["02-14-2018.csv", "02-15-2018.csv", "02-16-2018.csv", "02-21-2018.csv", "03-02-2018.csv"]
     path = "data/"
 
-    big_training_df = pd.DataFrame()
-    big_evaluation_df = pd.DataFrame()
+    big_data_df = pd.DataFrame()
 
+    # Combine CSV files into one big DataFrame
     for file_name in files:
-        print("Cleaning " + file_name)
+        print("Preparing " + file_name)
 
         data = pd.read_csv(os.path.join(path, file_name))
 
@@ -47,55 +45,59 @@ def main():
         # following section from geeksforgeeks.org/data-normalization-with-pandas/
         df_to_normalize = nz_stdzero_file.copy()
 
-        # apply normalization techniques
-        for column in df_to_normalize.columns:
-            # check for string types in columns (can't take standard dev. of strings)
-            if type(df_to_normalize[column][0]) is str:
-                continue
+        big_data_df = pd.concat([big_data_df, df_to_normalize], ignore_index=True)
 
-            df_to_normalize[column] = df_to_normalize[column] / df_to_normalize[column].abs().max()
+    # Apply normalization techniques
+    print("Cleaning the data...")
 
-        # TODO: Look at standardize using z-score method? Returns values with mean=0 and std=1
+    for column in big_data_df.columns:
+        # Check for string types in columns (can't take standard dev. of strings)
+        if type(big_data_df[column][0]) is str:
+            continue
 
-        # Translate string labels to numbers. 0 = benign, 1 = FTP, 2 = SSH
-        df_to_normalize["Label"] = df_to_normalize["Label"].map({"Benign": 0, "FTP-BruteForce": 1, "SSH-Bruteforce": 2,
-                                                                 "DoS attacks-GoldenEye": 3,
-                                                                 "DoS attacks-Slowloris": 4,
-                                                                 "DoS attacks-SlowHTTPTest": 5,
-                                                                 "DoS attacks-Hulk": 6,
-                                                                 "DDOS attack-LOIC-UDP": 7,
-                                                                 "DDOS attack-HOIC": 8,
-                                                                 "Brute Force -Web": 9,
-                                                                 "Brute Force -XSS": 10,
-                                                                 "SQL Injection": 11})
+        big_data_df[column] = big_data_df[column] / big_data_df[column].abs().max()
 
-        # drop rows with empty values
-        labels = df_to_normalize["Label"]
-        df_to_normalize = df_to_normalize.drop(["Label"], axis=1)
-        df_to_normalize = df_to_normalize.astype(np.float32)
-        df_to_normalize = df_to_normalize.join(labels)
-        df_to_normalize = df_to_normalize.dropna()
+    # TODO: Look at standardize using z-score method? Returns values with mean=0 and std=1
 
-        # Shuffle data and split into training and evaluation data
-        df_to_normalize = df_to_normalize.sample(frac=1)
-        training_df = df_to_normalize.head(math.floor(len(df_to_normalize.index) / 2))
-        evaluation_df = df_to_normalize.tail(math.floor(len(df_to_normalize.index) / 2))
+    # Translate string labels to numbers
+    big_data_df["Label"] = big_data_df["Label"].map({"Benign": 0, "FTP-BruteForce": 1, "SSH-Bruteforce": 2,
+                                                     "DoS attacks-GoldenEye": 3,
+                                                     "DoS attacks-Slowloris": 4,
+                                                     "DoS attacks-SlowHTTPTest": 5,
+                                                     "DoS attacks-Hulk": 6,
+                                                     "DDOS attack-LOIC-UDP": -1,
+                                                     "DDOS attack-HOIC": 7,
+                                                     "Bot": 8})
 
-        # rename file to ***cleaned.csv
-        training_file_name_cleaned_csv = file_name.replace(".csv", "_cleaned_training.csv")
-        evaluation_file_name_cleaned_csv = file_name.replace(".csv", "_cleaned_evaluation.csv")
-        training_df.to_csv(os.path.join(path, training_file_name_cleaned_csv), index=False)
-        evaluation_df.to_csv(os.path.join(path, evaluation_file_name_cleaned_csv), index=False)
-        print(file_name + " has been cleaned")
+    # Not enough instances of LOIC to train, drop them
+    bad_rows = big_data_df["Label"] == -1
+    big_data_df = big_data_df[~bad_rows]
 
-        big_training_df = pd.concat([big_training_df, training_df], ignore_index=True)
-        big_evaluation_df = pd.concat([big_evaluation_df, evaluation_df], ignore_index=True)
+    # The dataset contains some rows that accidentally contain the column labels again; drop these
+    bad_rows = big_data_df["Dst Port"] == "Dst Port"
+    big_data_df = big_data_df[~bad_rows]
+
+    # Drop rows with empty values
+    labels = big_data_df["Label"]
+    big_data_df = big_data_df.drop(["Label"], axis=1)
+    big_data_df = big_data_df.astype(np.float32)
+    big_data_df = big_data_df.join(labels)
+    big_data_df = big_data_df.dropna()
+
+    # Shuffle data and split into training and evaluation data
+    big_data_df = big_data_df.sample(frac=1)
+    big_training_df = big_data_df.head(math.floor(len(big_data_df.index) / 2))
+    big_evaluation_df = big_data_df.tail(math.floor(len(big_data_df.index) / 2))
 
     # Stratified sampling of all the data
     print("Performing stratified sampling of the data")
 
-    big_training_df = big_training_df.groupby("Label", group_keys=False).apply(lambda group: group.sample(frac=0.2))
-    big_evaluation_df = big_evaluation_df.groupby("Label", group_keys=False).apply(lambda group: group.sample(frac=0.2))
+    big_training_df = big_training_df.groupby("Label", group_keys=False).apply(
+        # lambda group: group.sample(min(len(group), 50000)))
+        lambda group: group.sample(frac=0.2))
+    big_evaluation_df = big_evaluation_df.groupby("Label", group_keys=False).apply(
+        # lambda group: group.sample(min(len(group), 50000)))
+        lambda group: group.sample(frac=0.2))
 
     # Save sampled data
     big_training_df.to_csv("data/master_data_cleaned_training.csv", index=False)
