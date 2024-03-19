@@ -32,31 +32,27 @@ def load_data(device):
     eval_inputs = evaluation_data.drop("Label", axis=1)
 
     # Create tensor representations of the data
-    tensor_eval_classes = torch.tensor((), dtype=torch.float32).new_zeros((len(eval_classes), 12)).to(device)
+    tensor_eval_classes = torch.tensor((), dtype=torch.float32).new_zeros((len(eval_classes), 9)).to(device)
     for i in range(len(eval_classes)):
-        tensor_eval_classes[i, eval_classes[i]] = 1
-    tensor_train_classes = torch.tensor((), dtype=torch.float32).new_zeros((len(train_classes), 12)).to(device)
+        tensor_eval_classes[i, int(eval_classes[i])] = 1
+    tensor_train_classes = torch.tensor((), dtype=torch.float32).new_zeros((len(train_classes), 9)).to(device)
     for i in range(len(train_classes)):
-        tensor_train_classes[i, train_classes[i]] = 1
+        tensor_train_classes[i, int(train_classes[i])] = 1
     tensor_eval_inputs = torch.from_numpy(eval_inputs.to_numpy()).float().to(device)
     tensor_train_inputs = torch.from_numpy(train_inputs.to_numpy()).float().to(device)
 
     print("Training dataset composition: %i benign, %i SSH DoS, %i FTP DoS, %i GoldenEye DoS, %i Slowloris DoS, "
-          "%i SlowHTTPTest DoS, %i Hulk DoS, %i LOIC-UDP DDoS, %i HOIC DDoS, %i Web DoS, %i XSS DoS, and "
-          "%i SQL Injection DoS" % (
+          "%i SlowHTTPTest DoS, %i Hulk DoS, %i HOIC DDoS, and %i Bot DDoS" % (
               (train_classes == 0).sum(), (train_classes == 1).sum(), (train_classes == 2).sum(),
               (train_classes == 3).sum(), (train_classes == 4).sum(), (train_classes == 5).sum(),
-              (train_classes == 6).sum(), (train_classes == 7).sum(), (train_classes == 8).sum(),
-              (train_classes == 9).sum(), (train_classes == 10).sum(), (train_classes == 11).sum(),
+              (train_classes == 6).sum(), (train_classes == 7).sum(), (train_classes == 8).sum()
           ))
 
     print("Evaluation dataset composition: %i benign, %i SSH DoS, %i FTP DoS, %i GoldenEye DoS, %i Slowloris DoS, "
-          "%i SlowHTTPTest DoS, %i Hulk DoS, %i LOIC-UDP DDoS, %i HOIC DDoS, %i Web DoS, %i XSS DoS, and "
-          "%i SQL Injection DoS" % (
+          "%i SlowHTTPTest DoS, %i Hulk DoS, %i HOIC DDoS, and %i Bot DDoS" % (
               (eval_classes == 0).sum(), (eval_classes == 1).sum(), (eval_classes == 2).sum(),
               (eval_classes == 3).sum(), (eval_classes == 4).sum(), (eval_classes == 5).sum(),
-              (eval_classes == 6).sum(), (eval_classes == 7).sum(), (eval_classes == 8).sum(),
-              (eval_classes == 9).sum(), (eval_classes == 10).sum(), (eval_classes == 11).sum(),
+              (eval_classes == 6).sum(), (eval_classes == 7).sum(), (eval_classes == 8).sum()
           ))
 
     return (DoSDataset(tensor_train_inputs, tensor_train_classes),
