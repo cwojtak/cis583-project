@@ -2,7 +2,7 @@ import torch.nn as nn
 import torch.utils.data
 
 from models import train_basic_model, evaluate_basic_model
-from dataset import load_data
+from dataset import load_data, load_external_data
 
 if __name__ == '__main__':
 
@@ -17,11 +17,22 @@ if __name__ == '__main__':
     if device == "cuda":
         print("CUDA device name: %s" % torch.cuda.get_device_name(torch.cuda.current_device()))
 
-    # Train model
-    train_basic_model(device)
+    print("Do you want to train, evaluate, or classify external data with the model (t/e/c)?")
+    user_input = input()
 
-    # Evaluate model
-    train_dataset, eval_dataset = load_data(device)
-    eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=256)
-    loss_func = nn.MSELoss()
-    evaluate_basic_model(torch.load("models/basic_model.pth"), eval_dataset_loader, loss_func)
+    if user_input == "t":
+        # Train model
+        train_basic_model(device)
+    elif user_input == "e":
+        # Evaluate model
+        train_dataset, eval_dataset = load_data(device)
+        eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=256)
+        loss_func = nn.MSELoss()
+        evaluate_basic_model(torch.load("models/best_model.pth"), eval_dataset_loader, loss_func)
+    else:
+        print("Enter the path to the data you would like to classify.")
+        path = input()
+        data = load_external_data(device, path)
+        data_loader = torch.utils.data.DataLoader(data, batch_size=256)
+        loss_func = nn.MSELoss()
+        evaluate_basic_model(torch.load("models/best_model.pth"), data_loader, loss_func, True)

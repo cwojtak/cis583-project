@@ -5,6 +5,8 @@ import time
 from datetime import datetime
 import pandas as pd
 import numpy as np
+import copy
+from sklearn.model_selection import KFold
 
 from dataset import load_data
 
@@ -16,9 +18,12 @@ class BasicDoSModel(nn.Module):
         super().__init__()
         self.flatten = nn.Flatten()
         self.stack = nn.Sequential(
-            nn.Linear(68, 38),
+            nn.Linear(27, 24),
+            # nn.Dropout(0.2),
             nn.ReLU(),
-            nn.Linear(38, 15),
+            nn.Linear(24, 20),
+            nn.ReLU(),
+            nn.Linear(20, 15),
             nn.ReLU(),
             nn.Linear(15, 9),
             nn.Sigmoid()
@@ -36,24 +41,34 @@ class BasicDoSModel(nn.Module):
 # Training function for the basic model
 def train_basic_model(device):
     # Define hyperparameters
-    epochs = 100
-    batch_size = 256
-    learning_rate = 1
+    epochs = 30
+    batch_size = 128
+    learning_rate = 0.001
+    k_folds = 10
 
     # Create model and define loss function and optimizer
     model = BasicDoSModel().to(device)
+    # loss_func = nn.CrossEntropyLoss(weight=torch.tensor([0.35, 0.9, 0.9, 1.2, 1.2, 0.9, 0.8, 0.75, 0.85]).to(device))
     loss_func = nn.MSELoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     train_dataset, eval_dataset = load_data(device)
 
-    train_dataset_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size)
+    # train_dataset_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size)
     eval_dataset_loader = torch.utils.data.DataLoader(eval_dataset, batch_size=batch_size)
 
     # Prepare method to store graph data
     graph_data = pd.DataFrame(columns=["Accuracy", "Binary Precision", "Binary Recall", "Binary F1 Score",
                                        "Average Loss", "All-Class Precision", "All-Class Recall",
                                        "All-Class F1 Score"])
+
+    # Prepare folds
+    kf = KFold(n_splits=k_folds, shuffle=True)
+
+    # Keep track of best model
+    best_model = copy.deepcopy(model)
+    best_accuracy = 0
 
     start_time = time.time()
 
@@ -63,34 +78,52 @@ def train_basic_model(device):
     for i in range(epochs):
         model.train()
 
-        print("Epoch %4d\n====================================" % i)
-        for j, (inputs, true_class) in enumerate(train_dataset_loader):
-            # Begin forward pass
-            model_result = model(inputs)
-            loss = loss_func(model_result, true_class)
+        for fold, (train_idx, eval_idx) in enumerate(kf.split(train_dataset)):
+            fold_train_loader = torch.utils.data.DataLoader(
+                dataset=train_dataset,
+                batch_size=batch_size,
+                sampler=torch.utils.data.SubsetRandomSampler(train_idx)
+            )
+            fold_eval_loader = torch.utils.data.DataLoader(
+                dataset=eval_dataset,
+                batch_size=batch_size,
+                sampler=torch.utils.data.SubsetRandomSampler(eval_idx)
+            )
 
-            # Begin backward pass
-            loss.backward()
-            optimizer.step()
-            optimizer.zero_grad()
+            print("Epoch %4d-F%4d\n====================================" % (i, fold))
+            for j, (inputs, true_class) in enumerate(fold_train_loader):
+                # Begin forward pass
+                model_result = model(inputs)
+                loss = loss_func(model_result, true_class)
+
+                # Begin backward pass
+                loss.backward()
+                optimizer.step()
+                optimizer.zero_grad()
 
         # Evaluate model with evaluation data
         data_row = evaluate_basic_model(model, eval_dataset_loader, loss_func)
         graph_data = pd.concat([graph_data, data_row])
+
+        if data_row["Accuracy"][0] > best_accuracy:
+            best_accuracy = data_row["Accuracy"][0]
+            best_model = copy.deepcopy(model)
 
     # Save model
     end_time = time.time()
     print("Total time elapsed: %.2f" % (end_time - start_time))
     print("Training complete! Saving model...")
 
-    torch.save(model, "models/basic_model.pth")
+    model = best_model
+
+    torch.save(model, "models/best_model.pth")
     graph_data.to_csv("raw_results/data_%s.csv" % datetime.now().strftime("%m-%d-%Y_%H-%M-%S"), index=False)
 
     print("Save complete!")
 
 
 # Evaluation function for the basic model
-def evaluate_basic_model(model, eval_dataset_loader, loss_func):
+def evaluate_basic_model(model, eval_dataset_loader, loss_func, external_classify=False):
     print("Evaluating the model...")
 
     # Prepare statistics

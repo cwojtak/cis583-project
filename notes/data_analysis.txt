@@ -1,0 +1,92 @@
+Dropped due to N/A correlation:
+Flow.Byts.s
+Flow.Pkts.s
+
+Dropped due to low correlation:
+Bwd.Pkts.s
+Idle Min
+Idle Max
+Idle Std
+Idle Mean
+Active Min
+Active Max
+Active Std
+Active Mean
+
+Dropped due to low variation:
+Flow IAT Std
+Fwd IAT Std
+Flow IAT Min
+Fwd IAT Min
+Idle Max
+Fwd IAT Max
+Flow IAT Max
+Fwd IAT Tot
+Flow Duration
+Flow IAT Mean
+Fwd IAT Mean
+Fwd Act Data Pkts
+Subflow Fwd Pkts
+Tot Fwd Pkts
+Fwd Header Len
+Pkt Len Var
+Bwd Header Len
+TotLen Bwd Pkts
+Subflow Bwd Byts
+
+Subflow Fwd Byts
+TotLen Fwd Pkts
+Subflow Bwd Pkts
+Tot Bwd Pkts
+Down/Up Ratio
+Fwd Pkt Len Mean
+Fwd Seg Size Avg
+Fwd Pkt Len Max
+Pkt Len Max
+Fwd Pkt Len Min
+Pkt Len Std
+Bwd IAT Min
+Bwd Pkt Len Min
+
+Consider dropping if need only 15 attributes
+Pkt Len Mean
+Bwd IAT Mean
+Pkt Size Avg
+Bwd IAT Std
+Bwd Pkt Len Max
+FIN Flag Cnt
+Fwd Pkts/s
+Bwd IAT Max
+Bwd Pkts/s
+Bwd Pkt Len Mean
+Bwd Seg Size Avg
+
+
+25-setup:
+data = data[["ACK Flag Cnt", "PSH Flag Cnt", "RST Flag Cnt", "ECE Flag Cnt", "Init Fwd Win Byts",
+                    "Dst Port", "Init Bwd Win Byts", "Protocol", "URG Flag Cnt", "Bwd IAT Tot", "Fwd Seg Size Min",
+                    "SYN Flag Cnt", "Fwd PSH Flags", "Bwd Pkt Len Std", "Bwd Seg Size Avg", "Bwd Pkt Len Mean",
+                    "Bwd Pkts/s", "Bwd IAT Max", "Fwd Pkts/s", "FIN Flag Cnt", "Bwd Pkt Len Max", "Bwd IAT Std",
+                    "Pkt Size Avg", "Bwd IAT Mean", "Pkt Len Mean", "Label"]]
+
+28-setup:
+data = data[["ACK Flag Cnt", "PSH Flag Cnt", "RST Flag Cnt", "ECE Flag Cnt", "Init Fwd Win Byts",
+                    "Dst Port", "Init Bwd Win Byts", "Protocol", "URG Flag Cnt", "Bwd IAT Tot", "Fwd Seg Size Min",
+                    "SYN Flag Cnt", "Fwd PSH Flags", "Bwd Pkt Len Std", "Bwd Seg Size Avg", "Bwd Pkt Len Mean",
+                    "Bwd Pkts/s", "Bwd IAT Max", "Fwd Pkts/s", "FIN Flag Cnt", "Bwd Pkt Len Max", "Bwd IAT Std",
+                    "Pkt Size Avg", "Bwd IAT Mean", "Pkt Len Mean", "Flow Duration", "Tot Fwd Pkts",
+                    "Tot Bwd Pkts", "Label"]]
+
+Slow attempts:
+data.drop(columns=["Timestamp", "Flow Byts/s", "Flow Pkts/s", "Bwd Pkts/s",
+                           "Idle Min", "Idle Max", "Idle Std", "Idle Mean",
+                           "Active Min", "Active Max", "Active Std", "Active Mean"], inplace=True) - GOOD
+
+data.drop(columns=["Timestamp", "Flow Byts/s", "Flow Pkts/s", "Bwd Pkts/s",
+                           "Idle Min", "Idle Max", "Idle Std", "Idle Mean",
+                           "Active Min", "Active Max", "Active Std", "Active Mean",
+                           "Flow IAT Std", "Fwd IAT Std", "Flow IAT Min", "Fwd IAT Min",
+                           "Fwd IAT Max", "Flow IAT Max", "Fwd IAT Tot", "Flow IAT Mean",
+                           "Fwd IAT Mean", "Fwd Act Data Pkts", "Subflow Fwd Pkts",
+                           "Tot Fwd Pkts", "Fwd Header Len", "Pkt Len Var", "Bwd Header Len",
+                           "TotLen Bwd Pkts", "Subflow Bwd Byts"], inplace=True) - GOOD

@@ -1,0 +1,2 @@
+Dst Port,Protocol,Flow Duration,Fwd Pkt Len Std,Bwd Pkt Len Max,Bwd Pkt Len Mean,Bwd Pkt Len Std,Bwd IAT Tot,Bwd IAT Mean,Bwd IAT Std,Bwd IAT Max,Fwd PSH Flags,Fwd Pkts/s,Pkt Len Min,Pkt Len Mean,FIN Flag Cnt,SYN Flag Cnt,RST Flag Cnt,PSH Flag Cnt,ACK Flag Cnt,URG Flag Cnt,ECE Flag Cnt,Pkt Size Avg,Bwd Seg Size Avg,Init Fwd Win Byts,Init Bwd Win Byts,Fwd Seg Size Min,Label
+443,6,246,19.672315572906,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1,12195.121951219511,0.0,25.5,1,0,0,2,3,0,0,34.0,0.0,3562,0,32,6

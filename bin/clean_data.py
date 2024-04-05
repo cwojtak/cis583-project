@@ -22,9 +22,27 @@ def main():
         # description = files.describe()
         # description.to_csv("description.csv")
 
-        # drop timestamp column for now
-        # TODO: determine if the there is a way to use timestamp in neural network
-        data.drop(columns=["Timestamp"], inplace=True)
+        # Drop columns with little effect on the results
+        """
+        data = data[["ACK Flag Cnt", "PSH Flag Cnt", "RST Flag Cnt", "ECE Flag Cnt", "Init Fwd Win Byts",
+                    "Dst Port", "Init Bwd Win Byts", "Protocol", "URG Flag Cnt", "Bwd IAT Tot", "Fwd Seg Size Min",
+                    "SYN Flag Cnt", "Fwd PSH Flags", "Bwd Pkt Len Std", "Bwd Seg Size Avg", "Bwd Pkt Len Mean",
+                    "Bwd Pkts/s", "Bwd IAT Max", "Fwd Pkts/s", "FIN Flag Cnt", "Bwd Pkt Len Max", "Bwd IAT Std",
+                    "Pkt Size Avg", "Bwd IAT Mean", "Pkt Len Mean", "Flow Duration", "Tot Fwd Pkts",
+                    "Tot Bwd Pkts", "Label"]]
+        """
+        # data.drop(columns=["Timestamp"], inplace=True)
+        data.drop(columns=["Timestamp", "Flow Byts/s", "Flow Pkts/s", "Bwd Pkts/s",
+                           "Idle Min", "Idle Max", "Idle Std", "Idle Mean",
+                           "Active Min", "Active Max", "Active Std", "Active Mean",
+                           "Flow IAT Std", "Fwd IAT Std", "Flow IAT Min", "Fwd IAT Min",
+                           "Fwd IAT Max", "Flow IAT Max", "Fwd IAT Tot", "Flow IAT Mean",
+                           "Fwd IAT Mean", "Fwd Act Data Pkts", "Subflow Fwd Pkts",
+                           "Tot Fwd Pkts", "Fwd Header Len", "Pkt Len Var", "Bwd Header Len",
+                           "TotLen Bwd Pkts", "Subflow Bwd Byts", "Subflow Fwd Byts",
+                           "TotLen Fwd Pkts", "Subflow Bwd Pkts", "Tot Bwd Pkts", "Down/Up Ratio", "Fwd Pkt Len Mean",
+                           "Fwd Seg Size Avg", "Fwd Pkt Len Max", "Pkt Len Max", "Fwd Pkt Len Min", "Pkt Len Std",
+                           "Bwd IAT Min", "Bwd Pkt Len Min"], inplace=True)
 
         # remove columns that are all either 0 or 1
         non_zero_file = data.loc[:, (data != 0).any(axis=0)]
@@ -47,9 +65,27 @@ def main():
 
         big_data_df = pd.concat([big_data_df, df_to_normalize], ignore_index=True)
 
+    # Add additional data
+    augmented_data_files = ["HULK.csv", "GoldenEye.csv", "Slowloris.csv", "GoldenEye2.csv", "Slowloris2.csv",
+                            "GoldenEye3.csv", "GoldenEye4.csv"]
+    for augmented_file in augmented_data_files:
+        print("Adding augmented data file: " + augmented_file)
+
+        data = pd.read_csv("data/augment/" + augmented_file)
+        big_data_df = pd.concat([big_data_df, data], ignore_index=True)
+
     # Apply normalization techniques
     print("Cleaning the data...")
 
+    temp_labels = big_data_df["Label"]
+    big_data_df = big_data_df.drop("Label", axis=1)
+
+    # Record max used to normalize the columns. These will be applied to any data we want to test with after training
+    big_data_df.abs().max().to_frame().T.to_csv("test/normalization/max.csv", index=False)
+
+    big_data_df = big_data_df.join(temp_labels)
+
+    # Divide by max
     for column in big_data_df.columns:
         # Check for string types in columns (can't take standard dev. of strings)
         if type(big_data_df[column][0]) is str:
@@ -57,7 +93,24 @@ def main():
 
         big_data_df[column] = big_data_df[column] / big_data_df[column].abs().max()
 
-    # TODO: Look at standardize using z-score method? Returns values with mean=0 and std=1
+    temp_labels = big_data_df["Label"]
+    big_data_df = big_data_df.drop("Label", axis=1)
+
+    # Record mean and std used to normalize the columns. These will be applied to any data we want to test with
+    big_data_df.mean().to_frame().T.to_csv("test/normalization/mean.csv", index=False)
+    big_data_df.std().to_frame().T.to_csv("test/normalization/std.csv", index=False)
+
+    big_data_df = big_data_df.join(temp_labels)
+
+    # Convert to z-scores
+    for column in big_data_df.columns:
+        # Check for string types in columns (can't take standard dev. of strings)
+        if type(big_data_df[column][0]) is str:
+            continue
+
+        mean = big_data_df[column].mean()
+        std = big_data_df[column].std()
+        big_data_df[column] = (big_data_df[column] - mean) / std
 
     # Translate string labels to numbers
     big_data_df["Label"] = big_data_df["Label"].map({"Benign": 0, "FTP-BruteForce": 1, "SSH-Bruteforce": 2,
