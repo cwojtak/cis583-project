@@ -92,9 +92,10 @@ def train_basic_model(device):
     print("Training complete! Saving model...")
 
     torch.save(model, "models/basic_model.pth")
-    graph_data.to_csv("raw_results/data_%s.csv" % datetime.now().strftime("%m-%d-%Y_%H-%M-%S"))
+    graph_data.to_csv("raw_results/data_%s.csv" % datetime.now().strftime("%m-%d-%Y_%H-%M-%S"), index=False)
 
     print("Save complete!")
+
 
 # Evaluation function for the basic model
 def evaluate_basic_model(model, eval_dataset_loader, loss_func):
@@ -137,9 +138,9 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
                 fn[j] += torch.logical_not(model_results_dos).sum().item() - current_tn
 
     avg_loss /= total
-    precision = tp / (tp + fp)
-    recall = tp / (tp + fn)
-    f1_score = 2 * precision * recall / (precision + recall)
+    precision = np.divide(tp, (tp + fp), where=(tp + fp != 0))
+    recall = np.divide(tp, (tp + fn), where=(tp + fn != 0))
+    f1_score = np.divide(2 * precision * recall, (precision + recall), where=(precision + recall != 0))
     accuracy = num_correct / total
 
     print("Evaluation complete:\n Number Correct: (%6d/%6d)\n Accuracy: %2.8f\n Binary Precision: %2.8f\n Binary "
@@ -148,7 +149,7 @@ def evaluate_basic_model(model, eval_dataset_loader, loss_func):
           % (num_correct, total, accuracy, precision[0], recall[0], f1_score[0], avg_loss,
              np.average(precision), np.average(recall), np.average(f1_score)))
 
-    return pd.DataFrame({"Accuracy": [accuracy], "Binary Precision": [precision], "Binary Recall": [recall],
-                         "Binary F1 Score": [f1_score], "Average Loss": [avg_loss],
+    return pd.DataFrame({"Accuracy": [accuracy], "Binary Precision": [precision[0]], "Binary Recall": [recall[0]],
+                         "Binary F1 Score": [f1_score[0]], "Average Loss": [avg_loss],
                          "All-Class Precision": [np.average(precision)], "All-Class Recall": [np.average(recall)],
                          "All-Class F1 Score": [np.average(f1_score)]})
