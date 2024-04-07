@@ -18,6 +18,7 @@ class BasicDoSModel(nn.Module):
         self.stack = nn.Sequential(
             nn.Linear(68, 38),
             nn.ReLU(),
+            nn.Dropout(p=0.99),
             nn.Linear(38, 15),
             nn.ReLU(),
             nn.Linear(15, 9),
@@ -37,13 +38,20 @@ class BasicDoSModel(nn.Module):
 def train_basic_model(device):
     # Define hyperparameters
     epochs = 100
-    batch_size = 256
+    batch_size = 256*10
     learning_rate = 1
 
     # Create model and define loss function and optimizer
     model = BasicDoSModel().to(device)
     loss_func = nn.MSELoss()
+    # loss_func = nn.CrossEntropyLoss()
+    # loss_func = nn.PoissonNLLLoss()
+
     optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
+    # optimizer = torch.optim.Adadelta(model.parameters(), lr=learning_rate)
+    # optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    # optimizer = torch.optim.Rprop(model.parameters(), lr=learning_rate)
+
 
     train_dataset, eval_dataset = load_data(device)
 

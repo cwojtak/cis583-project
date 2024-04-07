@@ -100,8 +100,8 @@ def main():
         lambda group: group.sample(frac=0.2))
 
     # Save sampled data
-    big_training_df.to_csv("data/master_data_cleaned_training.csv", index=False)
-    big_evaluation_df.to_csv("data/master_data_cleaned_evaluation.csv", index=False)
+    big_training_df.to_csv("data/master_data_cleaned_training_baseline.csv", index=False)
+    big_evaluation_df.to_csv("data/master_data_cleaned_evaluation_baseline.csv", index=False)
 
 
 if __name__ == '__main__':

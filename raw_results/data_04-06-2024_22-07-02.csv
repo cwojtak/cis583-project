@@ -1,0 +1,301 @@
+,Accuracy,Binary Precision,Binary Recall,Binary F1 Score,Average Loss,All-Class Precision,All-Class Recall,All-Class F1 Score
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
+0,0.6156551960392174,"[0.6156552       nan       nan       nan       nan       nan       nan
+       nan       nan]",[1. 0. 0. 0. 0. 0. 0. 0. 0.],"[0.76211211        nan        nan        nan        nan        nan
+        nan        nan        nan]",3.374153731560896e-05,,0.1111111111111111,
