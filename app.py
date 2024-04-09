@@ -6,6 +6,7 @@ from dataset import load_data, load_external_data
 
 if __name__ == '__main__':
 
+    # Identify device to use (prefer gpu)
     device = ("cuda"
               if torch.cuda.is_available()
               else "mps"
@@ -13,10 +14,12 @@ if __name__ == '__main__':
               else "cpu"
               )
 
+    # Print selected device
     print("Device selected: %s" % device)
     if device == "cuda":
         print("CUDA device name: %s" % torch.cuda.get_device_name(torch.cuda.current_device()))
 
+    # Select operation to perform
     print("Do you want to train, evaluate, or classify external data with the model (t/e/c)?")
     user_input = input()
 
@@ -30,6 +33,7 @@ if __name__ == '__main__':
         loss_func = nn.MSELoss()
         evaluate_model(torch.load("models/final_model.pth"), eval_dataset_loader, loss_func)
     else:
+        # Perform a classification on an external file
         print("Enter the path to the data you would like to classify.")
         path = input()
         data = load_external_data(device, path)

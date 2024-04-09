@@ -12,7 +12,7 @@ from dataset import load_data
 
 
 # Model for classifying packets as part of various types of DDoS attacks
-class DoSModel(nn.Module):
+class BasicDoSModel(nn.Module):
     # Construct the model with a three layer stack
     def __init__(self):
         super().__init__()
@@ -47,7 +47,7 @@ def train_model(device):
     k_folds = 10
 
     # Create model and define loss function and optimizer
-    model = DoSModel().to(device)
+    model = BasicDoSModel().to(device)
     # loss_func = nn.CrossEntropyLoss(weight=torch.tensor([0.35, 0.9, 0.9, 1.2, 1.2, 0.9, 0.8, 0.75, 0.85]).to(device))
     loss_func = nn.MSELoss()
     # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
@@ -75,19 +75,16 @@ def train_model(device):
     print("Initial state of the model\n====================================")
     evaluate_model(model, eval_dataset_loader, loss_func)
 
+    # Perform training loop
     for i in range(epochs):
         model.train()
 
+        # Create folds and train on each of them
         for fold, (train_idx, eval_idx) in enumerate(kf.split(train_dataset)):
             fold_train_loader = torch.utils.data.DataLoader(
                 dataset=train_dataset,
                 batch_size=batch_size,
                 sampler=torch.utils.data.SubsetRandomSampler(train_idx)
-            )
-            fold_eval_loader = torch.utils.data.DataLoader(
-                dataset=eval_dataset,
-                batch_size=batch_size,
-                sampler=torch.utils.data.SubsetRandomSampler(eval_idx)
             )
 
             print("Epoch %4d-F%4d\n====================================" % (i, fold))
@@ -105,11 +102,12 @@ def train_model(device):
         data_row = evaluate_model(model, eval_dataset_loader, loss_func)
         graph_data = pd.concat([graph_data, data_row])
 
+        # Keep track of the best model
         if data_row["Accuracy"][0] > best_accuracy:
             best_accuracy = data_row["Accuracy"][0]
             best_model = copy.deepcopy(model)
 
-    # Save model
+    # Save the best model and other metrics data
     end_time = time.time()
     print("Total time elapsed: %.2f" % (end_time - start_time))
     print("Training complete! Saving model...")
@@ -162,12 +160,14 @@ def evaluate_model(model, eval_dataset_loader, loss_func, external_classify=Fals
                 fp[j] += model_results_dos.sum().item() - current_tp
                 fn[j] += torch.logical_not(model_results_dos).sum().item() - current_tn
 
+    # Calculate the metrics
     avg_loss /= total
     precision = np.divide(tp, (tp + fp), where=(tp + fp != 0))
     recall = np.divide(tp, (tp + fn), where=(tp + fn != 0))
     f1_score = np.divide(2 * precision * recall, (precision + recall), where=(precision + recall != 0))
     accuracy = num_correct / total
 
+    # Output the metrics
     print("Evaluation complete:\n Number Correct: (%6d/%6d)\n Accuracy: %2.8f\n Binary Precision: %2.8f\n Binary "
           "Recall: %2.8f\n Binary F1 Score: %2.8f\n Average Loss: %2.8f\n All-Class Precision: %2.8f\n "
           "All-Class Recall: %2.8f\n All-Class F1 Score: %2.8f\n"
