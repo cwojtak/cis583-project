@@ -11,8 +11,8 @@ from sklearn.model_selection import KFold
 from dataset import load_data
 
 
-# Basic model for classifying packets as part of various types of DDoS attacks
-class BasicDoSModel(nn.Module):
+# Model for classifying packets as part of various types of DDoS attacks
+class DoSModel(nn.Module):
     # Construct the model with a three layer stack
     def __init__(self):
         super().__init__()
@@ -38,8 +38,8 @@ class BasicDoSModel(nn.Module):
         return self.stack
 
 
-# Training function for the basic model
-def train_basic_model(device):
+# Training function for the model
+def train_model(device):
     # Define hyperparameters
     epochs = 30
     batch_size = 128
@@ -47,7 +47,7 @@ def train_basic_model(device):
     k_folds = 10
 
     # Create model and define loss function and optimizer
-    model = BasicDoSModel().to(device)
+    model = DoSModel().to(device)
     # loss_func = nn.CrossEntropyLoss(weight=torch.tensor([0.35, 0.9, 0.9, 1.2, 1.2, 0.9, 0.8, 0.75, 0.85]).to(device))
     loss_func = nn.MSELoss()
     # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
@@ -73,7 +73,7 @@ def train_basic_model(device):
     start_time = time.time()
 
     print("Initial state of the model\n====================================")
-    evaluate_basic_model(model, eval_dataset_loader, loss_func)
+    evaluate_model(model, eval_dataset_loader, loss_func)
 
     for i in range(epochs):
         model.train()
@@ -102,7 +102,7 @@ def train_basic_model(device):
                 optimizer.zero_grad()
 
         # Evaluate model with evaluation data
-        data_row = evaluate_basic_model(model, eval_dataset_loader, loss_func)
+        data_row = evaluate_model(model, eval_dataset_loader, loss_func)
         graph_data = pd.concat([graph_data, data_row])
 
         if data_row["Accuracy"][0] > best_accuracy:
@@ -116,14 +116,14 @@ def train_basic_model(device):
 
     model = best_model
 
-    torch.save(model, "models/best_model.pth")
+    torch.save(model, "models/final_model.pth")
     graph_data.to_csv("raw_results/data_%s.csv" % datetime.now().strftime("%m-%d-%Y_%H-%M-%S"), index=False)
 
     print("Save complete!")
 
 
 # Evaluation function for the basic model
-def evaluate_basic_model(model, eval_dataset_loader, loss_func, external_classify=False):
+def evaluate_model(model, eval_dataset_loader, loss_func, external_classify=False):
     print("Evaluating the model...")
 
     # Prepare statistics

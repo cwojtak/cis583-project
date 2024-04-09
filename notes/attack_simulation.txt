@@ -1,3 +1,0 @@
-Use
-trim_df = df[["Dst Port", "Protocol", "Flow Duration", "Fwd Pkt Len Std", "Bwd Pkt Len Max", "Bwd Pkt Len Mean", "Bwd Pkt Len Std", "Bwd IAT Tot", "Bwd IAT Mean", "Bwd IAT Std", "Bwd IAT Max", "Fwd PSH Flags", "Fwd Pkts/s", "Pkt Len Min", "Pkt Len Mean", "FIN Flag Cnt", "SYN Flag Cnt", "RST Flag Cnt", "PSH Flag Cnt", "ACK Flag Cnt", "URG Flag Cnt", "ECE Flag Cnt", "Pkt Size Avg", "Bwd Seg Size Avg", "Init Fwd Win Byts", "Init Bwd Win Byts", "Fwd Seg Size Min"]]
-for 27-input model.

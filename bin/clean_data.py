@@ -10,20 +10,19 @@ def main():
     files = ["02-14-2018.csv", "02-15-2018.csv", "02-16-2018.csv", "02-21-2018.csv", "03-02-2018.csv"]
     path = "data/"
 
+    # Prepare DataFrame for the data
     big_data_df = pd.DataFrame()
 
     # Combine CSV files into one big DataFrame
     for file_name in files:
         print("Preparing " + file_name)
 
+        # Read in CSV
         data = pd.read_csv(os.path.join(path, file_name))
-
-        # top = files.head()
-        # description = files.describe()
-        # description.to_csv("description.csv")
 
         # Drop columns with little effect on the results
         """
+        # Old example of dropping columns
         data = data[["ACK Flag Cnt", "PSH Flag Cnt", "RST Flag Cnt", "ECE Flag Cnt", "Init Fwd Win Byts",
                     "Dst Port", "Init Bwd Win Byts", "Protocol", "URG Flag Cnt", "Bwd IAT Tot", "Fwd Seg Size Min",
                     "SYN Flag Cnt", "Fwd PSH Flags", "Bwd Pkt Len Std", "Bwd Seg Size Avg", "Bwd Pkt Len Mean",
@@ -31,7 +30,6 @@ def main():
                     "Pkt Size Avg", "Bwd IAT Mean", "Pkt Len Mean", "Flow Duration", "Tot Fwd Pkts",
                     "Tot Bwd Pkts", "Label"]]
         """
-        # data.drop(columns=["Timestamp"], inplace=True)
         data.drop(columns=["Timestamp", "Flow Byts/s", "Flow Pkts/s", "Bwd Pkts/s",
                            "Idle Min", "Idle Max", "Idle Std", "Idle Mean",
                            "Active Min", "Active Max", "Active Std", "Active Mean",
@@ -44,28 +42,22 @@ def main():
                            "Fwd Seg Size Avg", "Fwd Pkt Len Max", "Pkt Len Max", "Fwd Pkt Len Min", "Pkt Len Std",
                            "Bwd IAT Min", "Bwd Pkt Len Min"], inplace=True)
 
-        # remove columns that are all either 0 or 1
+        # Remove columns that are all either 0 or 1
         non_zero_file = data.loc[:, (data != 0).any(axis=0)]
-        # non_zero_data.to_csv("non_zero_data.csv", index=False)
-        nz_description = non_zero_file.describe()
-        # nz_description.to_csv("nz_description.csv")
 
-        # remove columns with zero std. This would remove any cols with the same value
-        # did not do anything to this file, but could help with other files
+        # Remove columns with zero std. This would remove any cols with the same value
         cols = non_zero_file.select_dtypes([np.number]).columns
         std = non_zero_file[cols].std()
         cols_to_drop = std[std == 0].index
         nz_stdzero_file = non_zero_file.drop(cols_to_drop, axis=1)
-        # nz_stdzero_file.to_csv("nz_stdzero.csv")
-        nz_stdzero_desc = non_zero_file.describe()
-        # nz_stdzero_desc.to_csv("nz_stdzero_desc.csv")
 
-        # following section from geeksforgeeks.org/data-normalization-with-pandas/
+        # Following section from geeksforgeeks.org/data-normalization-with-pandas/
         df_to_normalize = nz_stdzero_file.copy()
 
+        # Add the current CSV to the overall dataset
         big_data_df = pd.concat([big_data_df, df_to_normalize], ignore_index=True)
 
-    # Add additional data
+    # Add additional data that we harvested ourselves
     augmented_data_files = ["HULK.csv", "GoldenEye.csv", "Slowloris.csv", "GoldenEye2.csv", "Slowloris2.csv",
                             "GoldenEye3.csv", "GoldenEye4.csv"]
     for augmented_file in augmented_data_files:
@@ -146,10 +138,8 @@ def main():
     print("Performing stratified sampling of the data")
 
     big_training_df = big_training_df.groupby("Label", group_keys=False).apply(
-        # lambda group: group.sample(min(len(group), 50000)))
         lambda group: group.sample(frac=0.2))
     big_evaluation_df = big_evaluation_df.groupby("Label", group_keys=False).apply(
-        # lambda group: group.sample(min(len(group), 50000)))
         lambda group: group.sample(frac=0.2))
 
     # Save sampled data
