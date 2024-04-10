@@ -19,7 +19,6 @@ class BasicDoSModel(nn.Module):
         self.flatten = nn.Flatten()
         self.stack = nn.Sequential(
             nn.Linear(27, 24),
-            # nn.Dropout(0.2),
             nn.ReLU(),
             nn.Linear(24, 20),
             nn.ReLU(),
@@ -48,9 +47,7 @@ def train_model(device):
 
     # Create model and define loss function and optimizer
     model = BasicDoSModel().to(device)
-    # loss_func = nn.CrossEntropyLoss(weight=torch.tensor([0.35, 0.9, 0.9, 1.2, 1.2, 0.9, 0.8, 0.75, 0.85]).to(device))
     loss_func = nn.MSELoss()
-    # optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
     train_dataset, eval_dataset = load_data(device)
