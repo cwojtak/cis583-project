@@ -1,4 +1,7 @@
 **/data
+**/bin
 **/models
+**/raw_results
+**/test
 **/.git
 **/.venv

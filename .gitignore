@@ -1,2 +1,3 @@
 .venv
-/data/
+/data/*.csv
+/not_published
