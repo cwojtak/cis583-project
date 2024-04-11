@@ -8,6 +8,7 @@
 https://docs.nvidia.com/cuda/wsl-user-guide/index.html and
 https://learn.microsoft.com/en-us/windows/ai/directml/gpu-cuda-in-wsl.
 5. Python, matplotlib, pandas, and numpy installed on Windows for data preprocessing and visualization. 
+6. For building the project, make should be installed.
 
 ## Running the Project
 Once the project requirements have been satisfied, enter the root project directory.     
